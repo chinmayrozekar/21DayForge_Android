@@ -18,7 +18,7 @@ This app was built with a simple belief: **a tool that helps people grow should 
 
 The philosophy behind 21DayForge draws from the Bhagavad Gita, which teaches that self-discipline, consistency, and detachment from results are the pillars of personal growth. As Krishna says:
 
-> *"Yogaḥ karmasu kauśalam"* — Excellence in action is Yoga.
+> *"योगः कर्मसु कौशलम्"* — Excellence in action is Yoga.
 
 This app embodies that principle — showing up every day, putting in the work, and trusting the process.
 
