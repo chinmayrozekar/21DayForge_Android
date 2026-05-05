@@ -1,6 +1,26 @@
 # 21DayForge (Android)
 
-A Flutter-based Android application for building productive habits through a 21-day challenge.
+A free, no-nonsense Android app for building productive habits through a 21-day challenge.
+
+## Motivation
+
+### Why 21 Days?
+
+Psychological research suggests that it takes approximately 21 days to form a new habit. Yet, most habit trackers and challenge-monitoring apps lock this simple concept behind expensive paywalls.
+
+Something as fundamental as building good habits should not require a monthly subscription. You shouldn't have to pay to become a better version of yourself.
+
+### A Service, Not a Product
+
+This app was built with a simple belief: **a tool that helps people grow should be free and accessible to everyone**. No ads. No subscriptions. No data harvesting. Just a clean, focused experience that helps you build lasting habits — one day at a time.
+
+### Inspired by the Bhagavad Gita
+
+The philosophy behind 21DayForge draws from the Bhagavad Gita, which teaches that self-discipline, consistency, and detachment from results are the pillars of personal growth. As Krishna says:
+
+> *"Yogaḥ karmasu kauśalam"* — Excellence in action is Yoga.
+
+This app embodies that principle — showing up every day, putting in the work, and trusting the process.
 
 ## Download
 
