@@ -118,9 +118,11 @@ class Challenge extends HiveObject {
 
   int get currentStreak {
     final end = (elapsedDays + 1).clamp(0, 21);
-            if (end <= 0) return 0;
+    if (end <= 0) return 0;
     int streak = 0;
     for (int i = end - 1; i >= 0; i--) {
+      final frozen = freezeDays != null && freezeDays![i];
+      if (frozen) continue;
       if (dailyStatus[i]) {
         streak++;
       } else {
@@ -144,9 +146,12 @@ class Challenge extends HiveObject {
     return longest;
   }
 
+  static const int maxFreezeDays = 3;
+
   int get availableFreezeDays {
     if (freezeDays == null) return 0;
-    return freezeDays!.where((day) => !day).length;
+    final used = freezeDays!.where((day) => day).length;
+    return (maxFreezeDays - used).clamp(0, maxFreezeDays);
   }
 
   bool get isTodayFrozen {

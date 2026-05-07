@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/settings_provider.dart';
 
 final themeProvider = Provider<ThemeData>((ref) {
-  final settings = ref.watch(settingsProvider);
-  
   final colorScheme = ColorScheme.fromSeed(
     seedColor: Colors.deepOrange,
     brightness: Brightness.light,
@@ -28,13 +26,14 @@ final darkThemeProvider = Provider<ThemeData>((ref) {
   );
 });
 
-ThemeData getTheme(AppAppearance appearance, ThemeData lightTheme, ThemeData darkTheme) {
+ThemeData getTheme(AppAppearance appearance, ThemeData lightTheme, ThemeData darkTheme, BuildContext context) {
   switch (appearance) {
     case AppAppearance.light:
       return lightTheme;
     case AppAppearance.dark:
       return darkTheme;
     case AppAppearance.system:
-      return lightTheme;
+      final brightness = MediaQuery.platformBrightnessOf(context);
+      return brightness == Brightness.dark ? darkTheme : lightTheme;
   }
 }

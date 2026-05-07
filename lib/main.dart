@@ -23,7 +23,7 @@ class DayforgeApp extends ConsumerWidget {
     final lightTheme = ref.watch(themeProvider);
     final darkTheme = ref.watch(darkThemeProvider);
 
-    final theme = getTheme(settings.appearance, lightTheme, darkTheme);
+    final theme = getTheme(settings.appearance, lightTheme, darkTheme, context);
 
     return MaterialApp(
       title: '21DayForge',

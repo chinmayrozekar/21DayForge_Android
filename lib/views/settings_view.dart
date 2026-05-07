@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import '../providers/settings_provider.dart';
 import '../services/notification_service.dart';
 import 'dart:convert';
-import 'dart:typed_data';
 
 class SettingsView extends ConsumerStatefulWidget {
   const SettingsView({super.key});
@@ -30,7 +29,7 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           ListTile(
             leading: CircleAvatar(
               backgroundImage: settings.profileImageData != null
-                  ? MemoryImage(base64Decode(settings.profileImageData!))
+                  ? _decodeProfileImage(settings.profileImageData!)
                   : null,
               child: settings.profileImageData == null
                   ? const Icon(Icons.person)
@@ -125,6 +124,14 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
     );
   }
 
+  ImageProvider? _decodeProfileImage(String data) {
+    try {
+      return MemoryImage(base64Decode(data));
+    } catch (_) {
+      return null;
+    }
+  }
+
   Widget _buildSectionHeader(BuildContext context, String title) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -178,9 +185,10 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
           ),
           TextButton(
             onPressed: () {
-              ref.read(settingsProvider.notifier).setUserName(
-                    controller.text.trim(),
-                  );
+              final name = controller.text.trim();
+              if (name.isNotEmpty) {
+                ref.read(settingsProvider.notifier).setUserName(name);
+              }
               Navigator.pop(context);
             },
             child: const Text('Save'),
@@ -192,7 +200,12 @@ class _SettingsViewState extends ConsumerState<SettingsView> {
 
   Future<void> _changePhoto() async {
     final picker = ImagePicker();
-    final image = await picker.pickImage(source: ImageSource.gallery);
+    final image = await picker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 512,
+      maxHeight: 512,
+      imageQuality: 80,
+    );
     if (image != null) {
       final bytes = await image.readAsBytes();
       final base64String = base64Encode(bytes);

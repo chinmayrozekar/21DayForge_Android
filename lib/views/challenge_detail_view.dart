@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/challenge.dart';
 import '../providers/challenge_provider.dart';
 import '../widgets/day_circle.dart';
+import 'new_challenge_view.dart';
 
 class ChallengeDetailView extends ConsumerWidget {
   final Challenge challenge;
@@ -11,6 +12,8 @@ class ChallengeDetailView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Watch so the UI rebuilds whenever a day is toggled or a freeze is used.
+    ref.watch(challengesProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(challenge.title),
@@ -320,6 +323,10 @@ class ChallengeDetailView extends ConsumerWidget {
   }
 
   void _showEdit(BuildContext context) {
-    // TODO: Navigate to edit view
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => NewChallengeView(challenge: challenge),
+    );
   }
 }
