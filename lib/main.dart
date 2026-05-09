@@ -10,7 +10,11 @@ import 'views/onboarding_view.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageService.init();
-  await NotificationService.init();
+  try {
+    await NotificationService.init();
+  } catch (_) {
+    // Notification init failure must not prevent app launch
+  }
   runApp(const ProviderScope(child: DayforgeApp()));
 }
 
